@@ -1,0 +1,29 @@
+{
+  "name": "omape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "next build",
+    "start": "next start -p $PORT",
+    "dev": "next",
+    "heroku-postbuild": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelhenrique2000/OMAPE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joelhenrique2000/OMAPE/issues"
+  },
+  "homepage": "https://github.com/joelhenrique2000/OMAPE#readme"
+}
