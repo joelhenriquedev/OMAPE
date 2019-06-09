@@ -1,0 +1,223 @@
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+    
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    
+
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
+    
+    .container {
+        background: red;
+        width: 10vw;
+    }
+
+    /**  HEADER
+    */
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 65px;
+        width: 100%;
+        background: #F5F5F5;
+    }
+
+    .logo-header {
+        height: 70%;
+        width: 130px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 0 20px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 42px;
+        display: flex;
+        align-items: center;
+        color: #6770B7;
+    }
+
+    .menu-header {
+        height: 70%;
+        margin: 0 20px 0 0;
+    }
+
+    .menu-header ul {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        list-style-type: none;
+        padding-inline-start: 0;
+        font-style: normal;
+    }
+
+    .menu-header ul > li {
+        margin: 0 14px;
+    }
+
+    .menu-header ul li a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    /**  INICIO
+    */
+
+    .inicio {
+        height: 669px;
+        width: 100%;
+        background: rgb(46, 46, 46);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container-inicio {
+        height: 432px;
+        width: 1014px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container-inicio-introducao {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container-inicio div p:nth-child(1) {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 42px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+        margin: 0;
+    }
+
+    .container-inicio div p:nth-child(2) {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        color: #FFFFFF;
+    }
+
+    .container-inicio p {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        
+    }
+
+    .container-inicio button {
+        background: #6770B7;
+        border-radius: 11px;
+        border: none;
+        width: 294px;
+        height: 46px;
+        cursor: pointer;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    /**  SOBRE
+    */
+    .sobre {
+        height: 774px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container-sobre {
+        width: 1014px;
+        height: 432px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .logo-sobre {
+        width: 432px;
+        height: 100%;
+        background: #6770B7;
+    }
+
+    .informacao-sobre {
+        width: 582px;
+        height: 100%;
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /**  EQUIPE
+    */
+
+    .equipe {
+        height: 774px;
+        width: 100%;
+        background: rgb(67, 179, 33);
+    }
+
+    /**  CONTATO
+    */
+    
+    .contato {
+        height: 650px;
+        width: 100%;
+        background: #E2e;
+    }
+}
