@@ -1,13 +1,42 @@
 import React from 'react'
 
-const Index = () => {
-    return (
-        <div>
-            <h1>Home</h1>
+import firebase from "../lib/firebase";
 
-            <p>Lorem ipsum dolor sit amet</p>
-        </div>
-    )
+class Index extends React.Component {
+
+  constructor(props) {
+    super(props);
+    
+    this.state = { loading: true, rfps: {} };
+  }
+
+  componentDidMount() {
+
+    const database = firebase.database();
+    const developers = database.ref("developers");
+
+    developers.on("value", snapshot => {
+      const rfps = snapshot.val();
+      console.log(rfps);
+    })
+
+
+  }
+
+  render() {
+    //const { loading, rfps } = this.state;
+    //const rfpKeys = Object.keys(rfps);
+    return (
+      <div>
+        hhh
+      </div>
+    );
+  }
 }
+
+    
+
+
+
 
 export default Index
