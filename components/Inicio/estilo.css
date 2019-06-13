@@ -1,0 +1,108 @@
+.inicio {
+    height: 669px;
+    width: 100%;
+    background: rgb(46, 46, 46);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-inicio {
+    height: 432px;
+    width: 1014px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-inicio-introducao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-inicio header p:nth-child(1) {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.container-inicio header p:nth-child(2) {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    color: #FFFFFF;
+}
+
+.container-inicio p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    
+}
+
+.container-inicio button {
+    background: #6770B7;
+    border-radius: 11px;
+    border: none;
+    width: 294px;
+    height: 46px;
+    cursor: pointer;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+@media (max-width: 575.98px) { 
+    .container-inicio {
+        width: 400px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .container-inicio {
+        width: 550px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .container-inicio {
+        width: 614px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .container-inicio {
+        width: 814px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+}

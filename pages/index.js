@@ -1,6 +1,11 @@
 import React from 'react'
 import firebase from "../lib/firebase";
 import '../estilo.css'
+import Header from '../components/Header'
+import Inicio from '../components/Inicio/Inicio'
+import Sobre from '../components/Sobre/Sobre'
+import Equipe from '../components/Equipe'
+import Contato from '../components/Contato'
 
 class Index extends React.Component {
 
@@ -8,13 +13,16 @@ class Index extends React.Component {
     super(props);
 
     this.state = { 
-      sobre: "",
-      rfps: {} 
+      sobre: `A Olimpíada Pernambucana de Matemática (OPEMAT) é uma atividade de extensão realizada pelo Departamento de Matemática da Universidade Federal Rural de Pernambuco (UFRPE) em conjunto com as seguintes IES do estado: Universidade Federal de Pernambuco (UFPE), Universidade de Pernambuco (UPE) e Instituto Federal do Sertão de Pernambuco (IF SERTÃO-PE). Trata-se de uma competição para estudantes do 6º ao 9º ano do ensino fundamental e de todas as séries do ensino médio das escolas públicas e particulares de Pernambuco que consiste de uma prova realizada em polos definidos pela coordenação em uma única fase.
+
+      A OPEMAT foi realizada pela primeira vez em em 2015 e teve 150 participantes das cidades de Recife e Caruaru. Em 2018, na sua 4a edição contou com 1.380 estudantes provenientes de 168 escolas de 8 polos espalhados por Pernambuco.
+      
+      Este ano, a competição será realizada em 10 polos: Cabo de Santo Agostinho, Caruaru, Garanhuns, Igarassu, Nazaré da Mata, Ouricuri, Pesqueira, Petrolina, Recife e Serra Talhada. A prova ocorrerá no dia 19 de outubro de 2019 às 13h com duração de 4 horas e será composta por cinco questões sendo essas de dois tipos: proposições múltiplas e discursivas.`
     };
   }
 
   componentDidMount() {
-
+/**
     const database = firebase.database();
     const developers = database.ref("sobre");
 
@@ -26,111 +34,25 @@ class Index extends React.Component {
         sobre: rfps
       })
     })
-
+ */
 
   }
 
   render() {
-    //const { loading, rfps } = this.state;
-    //const rfpKeys = Object.keys(rfps);
     return (
       <React.Fragment>
-        <div className="header">
-            <div className="logo-header">
-              OMAPE
-            </div>
-            <div className="menu-header">
-              <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#equipe">Equipe</a></li>
-                <li><a href="#contato">Contato</a></li>
-                <li><a href="#">Efetuar login</a></li>
-              </ul>
-            </div>
-        </div>
-        <div id="inicio" className="inicio">
-        <div className="container-inicio">
-          <div className="container-inicio-introducao">
-            <p>SEJA BEM VINDO À OMAPE 2019</p>
-            <p>Olimpiada de matematica do agreste de pernambuco</p>
-          </div>
-          <p>Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p>
-          <button>baixe o edital</button>
-          </div>
-        </div>
-        <div id="sobre" className="sobre">
-            <div className="container-sobre">
-              <div className="logo-sobre">
-
-              </div>
-              <div className="informacao-sobre">
-                {this.state.sobre}
-              </div>
-            </div>
-            
-        </div>
-        <div id="equipe" className="equipe">
-            <div className="pessoa">
-                <div className="foto">
-
-                </div>
-                <div className="nome">
-                    Lorem ipsum dolor
-                </div>
-                <div className="funcao">
-                    Professor
-                </div>
-                <div className="botao-contato">
-                    entre em contato
-                </div>
-            </div>
-            <div className="pessoa">
-                <div className="foto">
-
-                </div>
-                <div className="nome">
-                    Lorem ipsum dolor
-                </div>
-                <div className="funcao">
-                    Professor
-                </div>
-                <div className="botao-contato">
-                    entre em contato
-                </div>
-            </div>
-            <div className="pessoa">
-                <div className="foto">
-
-                </div>
-                <div className="nome">
-                    Lorem ipsum dolor
-                </div>
-                <div className="funcao">
-                    Professor
-                </div>
-                <div className="botao-contato">
-                    entre em contato
-                </div>
-            </div>
-            <div className="pessoa">
-                <div className="foto">
-
-                </div>
-                <div className="nome">
-                    Lorem ipsum dolor
-                </div>
-                <div className="funcao">
-                    Professor
-                </div>
-                <div className="botao-contato">
-                    entre em contato
-                </div>
-            </div>
-        </div>
-        <div id="contato" className="contato">
-            Contato
-        </div>
+        <Header />
+        <Inicio />
+        <Sobre 
+          logo={null}
+          bio={this.state.sobre}
+        />
+        <Equipe 
+          pessoas={null}
+        />
+        <Contato 
+          email={null}
+        />
       </React.Fragment>
     );
   }
