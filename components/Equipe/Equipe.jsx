@@ -1,65 +1,76 @@
 import React from 'react'
 import './estilo.css'
 
+import Pessoa from '../CardPessoa/Pessoa'
+
 function Equipe() {
     return (
         <div id="equipe" className="equipe">
-            <div className="pessoa">
-                <div className="foto">
-                    
-                </div>
-                <div className="nome">
-                    Lorem ipsum dolor
-                </div>
-                <div className="funcao">
-                    Professor
-                </div>
-                <button className="botao-contato">
-                    entre em contato
-                </button>
-            </div>
-            <div className="pessoa">
-                <div className="foto">
-
-                </div>
-                <div className="nome">
-                    Lorem ipsum dolor
-                </div>
-                <div className="funcao">
-                    Professor
-                </div>
-                <button className="botao-contato">
-                    entre em contato
-                </button>
-            </div>
-            <div className="pessoa">
-                <div className="foto">
-
-                </div>
-                <div className="nome">
-                    Lorem ipsum dolor
-                </div>
-                <div className="funcao">
-                    Professor
-                </div>
-                <button className="botao-contato">
-                    entre em contato
-                </button>
-            </div>
-            <div className="pessoa">
-                <div className="foto">
-
-                </div>
-                <div className="nome">
-                    Lorem ipsum dolor
-                </div>
-                <div className="funcao">
-                    Professor
-                </div>
-                <button className="botao-contato">
-                    entre em contato
-                </button>
-            </div>
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
+            <Pessoa 
+                nome={"Lorem ipsum"}
+                funcao={"Professor"}
+                email={"example@gmail.com"}
+            />
         </div>
     )
 }

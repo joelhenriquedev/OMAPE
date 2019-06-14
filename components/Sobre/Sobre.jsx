@@ -6,7 +6,7 @@ function Sobre(props) {
         <section id="sobre" className="sobre">
             <div className="container-sobre">
               <div className="logo-sobre">
-
+                <img src="/static/logo.png" />
               </div>
               <div className="informacao-sobre">
                 {props.bio}

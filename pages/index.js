@@ -1,11 +1,11 @@
 import React from 'react'
 import firebase from "../lib/firebase";
 import '../estilo.css'
-import Header from '../components/Header'
+import Header from '../components/Header/Header'
 import Inicio from '../components/Inicio/Inicio'
 import Sobre from '../components/Sobre/Sobre'
 import Equipe from '../components/Equipe/Equipe'
-import Contato from '../components/Contato'
+import Contato from '../components/Contato/Contato'
 
 class Index extends React.Component {
 

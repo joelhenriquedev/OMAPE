@@ -1,0 +1,101 @@
+.pessoa {
+    width: 353px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.foto {
+    width: 116px;
+    height: 116px;
+    background: rgb(255, 255, 255);
+    border-radius: 58px;
+    position: relative;
+    margin: 20px 0;
+}
+.foto img {
+    width: 100%;
+    border-radius: 50%;
+}
+.foto::before {
+    content: '';
+    position: absolute;
+    width: 136px;
+    height: 136px;
+    top: -10px;
+    right: -10px;
+    box-sizing: border-box;
+    border-radius: 68px;
+    border: 4px solid rgb(255, 255, 255);
+}
+.nome {
+    color: #fff;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 39px;
+    align-items: center;
+    text-align: center;
+}
+.funcao {
+    margin-top: 6px;
+    color: #fff;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    align-items: center;
+    text-align: center;
+}
+.botao-contato {
+    background: #FFFFFF;
+    border-radius: 6px;
+    width: 163px;
+    height: 40px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    align-items: center;
+    text-align: center;
+    color: #3E50B4;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+@media (max-width: 575.98px) { 
+    .pessoa {
+        margin: 30px 20px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .pessoa {
+        margin: 30px 7px;
+        width: 300px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .pessoa {
+        margin: 30px 7px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .pessoa {
+        margin: 30px 7px;
+        width: 270px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .pessoa {
+        margin: 30px 7px;
+        width: 270px;
+    }
+}

@@ -1,0 +1,117 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 65px;
+    width: 100%;
+    background: rgb(255, 255, 255);
+}
+.logo-header {
+    height: 70%;
+    width: 130px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 20px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+    display: flex;
+    align-items: center;
+    color: #388E3C;
+}
+.menu-header-hamburger {
+    height: 70%;
+    margin: 0 20px 0 0;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+}
+.menu-header {
+    height: 70%;
+    margin: 0 20px 0 0;
+}
+.menu-header ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style-type: none;
+    padding-inline-start: 0;
+    font-style: normal;
+}
+.menu-header ul > li {
+    margin: 0 14px;
+}
+.menu-header ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.menu-hamburger {
+
+}
+
+.menu-hamburger ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    padding-inline-start: 0;
+    font-style: normal;
+}
+
+.menu-hamburger ul > li {
+    margin: 0 14px;
+    padding: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.menu-hamburger ul li:hover {
+    color: #fff;
+    background: #388E3C;
+}
+
+.menu-hamburger ul li:hover a {
+    color: #fff;
+}
+
+.menu-hamburger ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+@media (max-width: 575.98px) { 
+    .menu-header {
+        display: none;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .menu-header {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .menu-header-hamburger, .menu-hamburger {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .menu-header-hamburger, .menu-hamburger {
+        display: none;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .menu-header-hamburger, .menu-hamburger {
+        display: none;
+    }
+}

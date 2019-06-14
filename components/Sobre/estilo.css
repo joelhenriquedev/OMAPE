@@ -17,7 +17,10 @@
     margin-bottom: 70px;
     width: 200px;
     height: 200px;
-    background: #6770B7;
+}
+
+.logo-sobre img {
+    width: 100%;
 }
 
 .informacao-sobre {
@@ -48,12 +51,17 @@
     .container-sobre {
         width: 514px;
     }
-
+    .informacao-sobre {
+        font-size: 20px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) { 
     .container-sobre {
         width: 714px;
+    }
+    .informacao-sobre {
+        font-size: 20px;
     }
 }
 
@@ -61,10 +69,16 @@
     .container-sobre {
         width: 814px;
     }
+    .informacao-sobre {
+        font-size: 20px;
+    }
 }
 
 @media (min-width: 1200px) {
     .container-sobre {
         width: 1014px;
+    }
+    .informacao-sobre {
+        font-size: 20px;
     }
 }
