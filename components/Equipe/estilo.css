@@ -4,7 +4,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    background: rgb(187, 55, 55);
+    background-image: linear-gradient(0deg, rgba(27, 145, 12, 0.932), rgba(41, 219, 18, 0.863)), url("/static/background-inicio.png");
+    background-size: cover;
 }
 .pessoa {
     width: 353px;
