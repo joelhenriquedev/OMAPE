@@ -1,7 +1,7 @@
 import React from 'react'
 import './estilo.css'
 
-function Contato(props) {
+function Contato({email}) {
   return (
     <div id="contato" className="contato">
       <div className="container-titulo-contato">
@@ -9,10 +9,12 @@ function Contato(props) {
         <p>Qualquer dúvida fale conosco</p>
       </div>
       <div className="container-contato-email">
-        <button className="botao-contato-blue">
-          entre em contato
-        </button>
-        example@gmail.com
+        <a href={email}>
+          <button className="botao-contato-blue">
+            entre em contato
+          </button>
+        </a>
+        {email}
       </div>
       <div className="row-contato"></div>
       <div className="container-titulo-contato">

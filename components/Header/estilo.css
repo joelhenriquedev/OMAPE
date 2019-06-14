@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     font-size: 25px;
+    cursor: pointer;
 }
 .menu-header {
     height: 70%;
@@ -52,6 +53,15 @@
 
 .menu-hamburger {
 
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: flex;
 }
 
 .menu-hamburger ul {
@@ -62,13 +72,17 @@
     list-style-type: none;
     padding-inline-start: 0;
     font-style: normal;
+    width: 100%;
 }
 
-.menu-hamburger ul > li {
-    margin: 0 14px;
-    padding: 15px;
+.menu-hamburger ul li a {
+    width: 100vw;
+    height: 60px;
     cursor: pointer;
-    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-hamburger ul li:hover {

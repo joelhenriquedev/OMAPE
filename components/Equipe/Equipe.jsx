@@ -3,74 +3,25 @@ import './estilo.css'
 
 import Pessoa from '../CardPessoa/Pessoa'
 
-function Equipe() {
+function Equipe({pessoas}) {
+
+    let listPessoas = pessoas.map(el => {
+        return (
+            <Pessoa
+                key={el.id}
+                nome={el.nome}
+                funcao={el.funcao}
+                email={el.email}
+            />
+        )
+    })
+
     return (
         <div id="equipe" className="equipe">
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
-            <Pessoa 
-                nome={"Lorem ipsum"}
-                funcao={"Professor"}
-                email={"example@gmail.com"}
-            />
+            <div className="titulo">
+            <p>Quem faz parte</p>
+            </div>
+            {listPessoas}
         </div>
     )
 }
