@@ -12,109 +12,102 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
-      sobre: `A Olimpíada Pernambucana de Matemática (OPEMAT) é uma atividade de extensão realizada pelo Departamento de Matemática da Universidade Federal Rural de Pernambuco (UFRPE) em conjunto com as seguintes IES do estado: Universidade Federal de Pernambuco (UFPE), Universidade de Pernambuco (UPE) e Instituto Federal do Sertão de Pernambuco (IF SERTÃO-PE). Trata-se de uma competição para estudantes do 6º ao 9º ano do ensino fundamental e de todas as séries do ensino médio das escolas públicas e particulares de Pernambuco que consiste de uma prova realizada em polos definidos pela coordenação em uma única fase.
-              A OPEMAT foi realizada pela primeira vez em em 2015 e teve 150 participantes das cidades de Recife e Caruaru. Em 2018, na sua 4a edição contou com 1.380 estudantes provenientes de 168 escolas de 8 polos espalhados por Pernambuco.
-            Este ano, a competição será realizada em 10 polos: Cabo de Santo Agostinho, Caruaru, Garanhuns, Igarassu, Nazaré da Mata, Ouricuri, Pesqueira, Petrolina, Recife e Serra Talhada. A prova ocorrerá no dia 19 de outubro de 2019 às 13h com duração de 4 horas e será composta por cinco questões sendo essas de dois tipos: proposições múltiplas e discursivas.`,
-      titulo: 'seja bem vindo à omape 2019',
-      subTitulo: 'Olimpiada de matematica do agreste de pernambuco',
-      curtaDescricao: 'Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
+    this.state = {
+      sobre: '',
+      titulo: '',
+      subTitulo: '',
+      curtaDescricao: '',
       edital: null,
-      pessoas: [
-        {
-          "id": 0,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 1,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 2,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 3,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 4,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 5,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 6,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 7,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 8,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 9,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        },
-        {
-          "id": 10,
-          "nome": "Lorem ipsum",
-          "funcao": "Professor",
-          "email": "joelhenrique2000@gmail.com"
-        }
-      ],
-      emailContato: 'joelhenrique2000@gmail.com'
+      pessoas: [],
+      email: '',
+      facebook: '',
+      instagram: ''
     };
-      
-    }
+  }
 
-  componentDidMount() {
-/**
-    const database = firebase.database();
-    const developers = database.ref("sobre");
+  componentWillMount() {
+    const database = firebase.firestore();
+    const paginaInicio = database.collection('paginaInicio').doc('e7f6P3zK64C4OV3u8sZm');
+    const paginaSobre = database.collection('paginaSobre').doc('dZsgTkAuFlfWqBUzFkWW')
+    const paginaContato = database.collection('paginaContato').doc('0HgLksK6xzDB6p140ADY')
 
-    developers.on("value", snapshot => {
-      const rfps = snapshot.val();
-      console.log(rfps);
-
-      this.setState({
-        sobre: rfps
+    paginaInicio.get()
+      .then(doc => {
+        if (!doc.exists) {
+          console.log('No such document!');
+        } else {
+          this.setState({
+            titulo: doc.data().titulo,
+            subTitulo: doc.data().subTitulo,
+            curtaDescricao: doc.data().curtaDescricao
+          })
+        }
       })
-    })
- */
+      .catch(err => {
+        console.log(err)
+      })
 
+    paginaSobre.get()
+      .then(doc => {
+        if (!doc.exists) {
+          console.log('No such document!');
+        } else {
+          this.setState({
+            sobre: doc.data().sobre
+          })
+        }
+      })
+      .catch(err =>
+        console.log(err)
+      )
+
+
+    var citiesRef = database.collection('equipe');
+    var query = citiesRef.get()
+      .then(snapshot => {
+
+        let listaPessoas = []
+
+        snapshot.forEach(doc => {
+          listaPessoas.push({
+            "id": doc.id,
+            "nome": doc.data().nome,
+            "funcao": doc.data().funcao,
+            "email": doc.data().email
+          })
+        });
+
+        this.setState({
+          pessoas: listaPessoas
+        })
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });
+
+
+    paginaContato.get()
+      .then(doc => {
+        if (!doc.exists) {
+          console.log('No such document!');
+        } else {
+          this.setState({
+            email: doc.data().email,
+            facebook: doc.data().facebook,
+            instagram: doc.data().instagram
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   render() {
     return (
       <React.Fragment>
         <Header />
-        <Inicio 
+        <Inicio
           titulo={this.state.titulo}
           subTitulo={this.state.subTitulo}
           curtaDescricao={this.state.curtaDescricao}
@@ -123,11 +116,11 @@ class Index extends React.Component {
         <Sobre
           bio={this.state.sobre}
         />
-        <Equipe 
+        <Equipe
           pessoas={this.state.pessoas}
         />
         <Contato
-          email={this.state.emailContato}
+          email={this.state.email}
         />
       </React.Fragment>
     );
