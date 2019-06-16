@@ -7,8 +7,6 @@ import Equipe from '../components/Equipe/Equipe'
 import Contato from '../components/Contato/Contato'
 import FirebaseService from '../services/FirebaseService'
 import Head from 'next/head'
-import { initGA, logPageView } from '../utils/analytics'
-import Router from 'next/router'
 
 class Index extends React.Component {
 
@@ -26,16 +24,6 @@ class Index extends React.Component {
       facebook: '',
       instagram: ''
     };
-  }
-
-  static async getInitialProps ({ Component, router, ctx }) {
-    let pageProps = {}
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
-    }
-
-    return { pageProps }
   }
 
   componentDidMount() {
