@@ -1,11 +1,12 @@
 import React from 'react'
-import firebase from "../lib/firebase";
 import '../estilo.css'
 import Header from '../components/Header/Header'
 import Inicio from '../components/Inicio/Inicio'
 import Sobre from '../components/Sobre/Sobre'
 import Equipe from '../components/Equipe/Equipe'
 import Contato from '../components/Contato/Contato'
+import FirebaseService from '../services/FirebaseService'
+import Head from 'next/head'
 
 class Index extends React.Component {
 
@@ -25,48 +26,36 @@ class Index extends React.Component {
     };
   }
 
-  componentWillMount() {
-    const database = firebase.firestore();
-    const paginaInicio = database.collection('paginaInicio').doc('e7f6P3zK64C4OV3u8sZm');
-    const paginaSobre = database.collection('paginaSobre').doc('dZsgTkAuFlfWqBUzFkWW')
-    const paginaContato = database.collection('paginaContato').doc('0HgLksK6xzDB6p140ADY')
+  componentDidMount() {
 
-    paginaInicio.get()
-      .then(doc => {
-        if (!doc.exists) {
-          console.log('No such document!');
-        } else {
-          this.setState({
-            titulo: doc.data().titulo,
-            subTitulo: doc.data().subTitulo,
-            curtaDescricao: doc.data().curtaDescricao
-          })
-        }
+    // Pegando os dados da seção Inicio
+    FirebaseService.getDocData('paginaInicio', 'e7f6P3zK64C4OV3u8sZm', (dataReceived) => {
+      this.setState({
+        titulo: dataReceived.titulo,
+        subTitulo: dataReceived.subTitulo,
+        curtaDescricao: dataReceived.curtaDescricao
       })
-      .catch(err => {
-        console.log(err)
+    })
+
+    // Pegando os dados da seção Sobre
+    FirebaseService.getDocData('paginaSobre', 'dZsgTkAuFlfWqBUzFkWW', (dataReceived) => {
+      this.setState({
+        sobre: dataReceived.sobre
       })
+    })
 
-    paginaSobre.get()
-      .then(doc => {
-        if (!doc.exists) {
-          console.log('No such document!');
-        } else {
-          this.setState({
-            sobre: doc.data().sobre
-          })
-        }
+    // Pegando os dados da seção Contato
+    FirebaseService.getDocData('paginaContato', '0HgLksK6xzDB6p140ADY', (dataReceived) => {
+      this.setState({
+        email: dataReceived.email,
+        facebook: dataReceived.facebook,
+        instagram: dataReceived.instagram
       })
-      .catch(err =>
-        console.log(err)
-      )
-
-
-    var citiesRef = database.collection('equipe');
-    var query = citiesRef.get()
-      .then(snapshot => {
-
-        let listaPessoas = []
+    })
+    
+    // Pegando os dados da seção Equipe
+    FirebaseService.getCollectionData('equipe', (snapshot) => {
+      let listaPessoas = []
 
         snapshot.forEach(doc => {
           listaPessoas.push({
@@ -80,32 +69,36 @@ class Index extends React.Component {
         this.setState({
           pessoas: listaPessoas
         })
-      })
-      .catch(err => {
-        console.log('Error getting documents', err);
-      });
+    })
+    
+  }
+ 
+  
+  seteGoogleTags() {
+    return {
+      _html: `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-
-    paginaContato.get()
-      .then(doc => {
-        if (!doc.exists) {
-          console.log('No such document!');
-        } else {
-          this.setState({
-            email: doc.data().email,
-            facebook: doc.data().facebook,
-            instagram: doc.data().instagram
-          })
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    gtag('config', 'UA-142112718-1');
+      `
+    }
   }
 
   render() {
     return (
       <React.Fragment>
+        <Head>
+
+        <script dangerouslySetInnerHTML={{__html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id=UA-142112718-1'+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-XXXXXX');`}} />
+
+        </Head>
+        <noscript dangerouslySetInnerHTML={{__html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden;"></iframe>`}} />
         <Header />
         <Inicio
           titulo={this.state.titulo}
