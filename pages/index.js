@@ -7,6 +7,8 @@ import Equipe from '../components/Equipe/Equipe'
 import Contato from '../components/Contato/Contato'
 import FirebaseService from '../services/FirebaseService'
 import Head from 'next/head'
+import { initGA, logPageView } from '../utils/analytics'
+import Router from 'next/router'
 
 class Index extends React.Component {
 
@@ -26,7 +28,21 @@ class Index extends React.Component {
     };
   }
 
+  static async getInitialProps ({ Component, router, ctx }) {
+    let pageProps = {}
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+
+    return { pageProps }
+  }
+
   componentDidMount() {
+
+    //initGA()
+    //logPageView()
+    //Router.router.events.on('routeChangeComplete', logPageView)
 
     // Pegando os dados da seção Inicio
     FirebaseService.getDocData('paginaInicio', 'e7f6P3zK64C4OV3u8sZm', (dataReceived) => {
@@ -90,12 +106,14 @@ class Index extends React.Component {
     return (
       <React.Fragment>
         <Head>
-
-        <script dangerouslySetInnerHTML={{__html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id=UA-142112718-1'+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-XXXXXX');`}} />
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','UA-142112718-1');`,
+        }}>
+        </script>
 
         </Head>
         <noscript dangerouslySetInnerHTML={{__html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden;"></iframe>`}} />
