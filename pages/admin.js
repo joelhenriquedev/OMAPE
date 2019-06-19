@@ -1,12 +1,12 @@
 
 import React from 'react'
-import firebase from "../lib/firebase";
 import '../estilo.css'
-
+import { firebaseAuth } from '../lib/firebase'
 import FirebaseService from '../services/FirebaseService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserEdit, faTrash, faUserPlus, faWindowClose, faClosedCaptioning, faSave } from '@fortawesome/free-solid-svg-icons'
+import { faUserEdit, faTrash, faUserPlus, faWindowClose, faClosedCaptioning, faSave, faUserTie, faUserAlt, faUserMinus } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
+import WithAuth from '../utils/withAuth'
 
 class CardSkeleton extends React.Component {
 
@@ -169,53 +169,34 @@ class CardEdital extends React.Component {
 
 }
 
-class PopUpUpdateUser extends React.Component {
-
-}
-
 class PopUpAddUser extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            pessoaPoupup: [{
-                'id': '',
-                'nome': '',
-                'funcao': '',
-                'email': ''
-            }]
-        };
-
-        this.save = this.save.bind(this)
     }
 
-    save(event) {
-        event.preventDefault()
-        console.log('oaaaaaaai')
-        this.props.click(event)
-    }
+ 
 
     render() {
-        return( 
+        return (
             <div className={"poupup-add-equipe " + this.props.active}>
                 <div>
                     <div className="titulo-admin">Adicione uma pessoa</div>
                     <div>
                         <div>
                             <label htmlFor="" className="label-card-admin">Nome</label>
-                            <input type="text" value="{this.state.titulo}" />
+                            <input type="text" onChange={this.props.onInputNome} value={this.props.nome} />
                         </div>
                         <div>
                             <label className="label-card-admin">Função</label>
-                            <input type="text" value="{this.state.subTitulo}" />
+                            <input type="text" onChange={this.props.onInputFuncao} value={this.props.funcao} />
                         </div>
                         <div>
                             <label className="label-card-admin">E-mail</label>
-                            <input type="text" value="{this.state.curtaDescricao}" />
+                            <input type="text" onChange={this.props.onInputEmail} value={this.props.email} />
                         </div>
                     </div>
                     <div>
-                        <div onClick={this.save}>
+                        <div onClick={this.props.onSaveUser}>
                             <FontAwesomeIcon icon={faSave} />
                         </div>
                         <div onClick={this.props.click}>
@@ -238,16 +219,25 @@ class CardEquipe extends React.Component {
             isPopUpUpdateUserEnable: false,
             pessoas: [],
             isPoupupActive: 'hiddenPoupup',
-            pessoaPoupup: [{ 
+            pessoaPoupup: [{
                 'id': '',
-                'nome': '', 
+                'nome': '',
                 'funcao': '',
                 'email': ''
-            }]
+            }],
+            id: '',
+            nome: '',
+            funcao: '',
+            email: ''
         };
 
-
+        this.saveUser = this.saveUser.bind(this)
         this.handleWindowPopUp = this.handleWindowPopUp.bind(this)
+        this.handleNome = this.handleNome.bind(this);
+        this.handleFuncao = this.handleFuncao.bind(this);
+        this.handleEmail = this.handleEmail.bind(this);
+        this.updateUser = this.updateUser.bind(this)
+        this.deleteUser = this.deleteUser.bind(this)
     }
 
     componentWillMount() {
@@ -278,19 +268,135 @@ class CardEquipe extends React.Component {
         event.preventDefault();
         console.log('oi')
         this.setState({
+            nome: '',
+            email: '',
+            funcao: '',
             isPoupupActive: (this.state.isPoupupActive === 'showPoupup') ? 'hiddenPoupup' : 'showPoupup'
+        })
+    }
+
+    handleNome(event) {
+        console.log(event.target.value)
+        event.preventDefault();
+        this.setState({
+            nome: event.target.value
+        })
+    }
+
+    handleFuncao(event) {
+        event.preventDefault();
+        this.setState({
+            funcao: event.target.value
+        })
+    }
+
+    handleEmail(event) {
+        event.preventDefault();
+        this.setState({
+            email: event.target.value
+        })
+    }
+
+    zerandoState() {
+        this.setState({
+            nome: '',
+            email: '',
+            funcao: '',
+            id: ''
+        })
+    }
+
+    saveUser() {
+
+        if(this.state.id === '') {
+
+            FirebaseService.createDoc('equipe', {
+                funcao: this.state.funcao,
+                email: this.state.email,
+                nome: this.state.nome
+            })
+
+            this.zerandoState()
+
+            this.setState({
+                isPoupupActive: (this.state.isPoupupActive === 'showPoupup') ? 'hiddenPoupup' : 'showPoupup'
+            })
+        } else {
+
+            FirebaseService.updateDoc('equipe', this.state.id, {
+                nome: this.state.nome,
+                funcao: this.state.funcao,
+                email: this.state.email
+            });
+
+            this.zerandoState()
+            this.setState({
+                isPoupupActive: (this.state.isPoupupActive === 'showPoupup') ? 'hiddenPoupup' : 'showPoupup'
+            })
+        }
+
+        // Pegando os dados da seção Equipe
+        FirebaseService.getCollectionData('equipe', (snapshot) => {
+            let listaPessoas = []
+
+            snapshot.forEach(doc => {
+                listaPessoas.push({
+                    "id": doc.id,
+                    "nome": doc.data().nome,
+                    "funcao": doc.data().funcao,
+                    "email": doc.data().email
+                })
+            });
+
+            this.setState({
+                pessoas: listaPessoas
+            })
+        })
+
+    }
+
+    updateUser(id, nome, funcao, email) {
+        this.setState({
+            id,
+            nome,
+            email,
+            funcao,
+            isPoupupActive: (this.state.isPoupupActive === 'showPoupup') ? 'hiddenPoupup' : 'showPoupup'
+        })
+        
+    }
+
+    deleteUser(id) {
+        FirebaseService.deleteDoc('equipe', id)
+
+        // Pegando os dados da seção Equipe
+        FirebaseService.getCollectionData('equipe', (snapshot) => {
+            let listaPessoas = []
+
+            snapshot.forEach(doc => {
+                listaPessoas.push({
+                    "id": doc.id,
+                    "nome": doc.data().nome,
+                    "funcao": doc.data().funcao,
+                    "email": doc.data().email
+                })
+            });
+
+            this.setState({
+                pessoas: listaPessoas
+            })
         })
     }
 
 
     render() {
         let liPessoas = this.state.pessoas.map(pes => (
-            <Li keyProps={pes.id} key={pes.id} nome={pes.nome} />
+            <Li onDeleteUser={this.deleteUser} onUpdateUser={this.updateUser} keyProps={pes.id} key={pes.id} nome={pes.nome} email={pes.email} funcao={pes.funcao}/>
         ))
 
         return (
             <React.Fragment>
-                <PopUpAddUser active={this.state.isPoupupActive} click={this.handleWindowPopUp} />
+                <PopUpAddUser nome={this.state.nome} funcao={this.state.funcao} email={this.state.email} onInputNome={this.handleNome} onInputEmail={this.handleEmail} onInputFuncao={this.handleFuncao} onSaveUser={this.saveUser} active={this.state.isPoupupActive} click={this.handleWindowPopUp} />
                 <div className="container-card-admin">
                     <div className="titulo-admin">Equipe</div>
                     <ul className="table-equipe">
@@ -390,18 +496,6 @@ class Li extends React.Component {
 
     constructor(props) {
         super(props)
-        this.handleUpdate = this.handleUpdate.bind(this)
-        this.handleDelete = this.handleDelete.bind(this)
-    }
-
-    handleUpdate(event) {
-        event.preventDefault();
-        console.log('atualizando o ', this.props.nome, ' com id ', this.props.keyProps)
-    }
-
-    handleDelete(event) {
-        event.preventDefault();
-        console.log('deletando o ', this.props.nome, ' com id ', this.props.keyProps)
     }
 
     render() {
@@ -410,11 +504,11 @@ class Li extends React.Component {
                 <div>
                     {this.props.nome}
                 </div>
-                <div onClick={this.handleUpdate}>
+                <div onClick={() => this.props.onUpdateUser(this.props.keyProps, this.props.nome, this.props.funcao, this.props.email)} >
                     <FontAwesomeIcon icon={faUserEdit} />
                 </div>
-                <div onClick={this.handleDelete}>
-                    <FontAwesomeIcon icon={faClosedCaptioning} />
+                <div onClick={() => this.props.onDeleteUser(this.props.keyProps)}>
+                    <FontAwesomeIcon icon={faUserMinus} />
                 </div>
             </li>
         )
@@ -422,11 +516,19 @@ class Li extends React.Component {
 }
 
 class Admin extends React.Component {
-
+    handleLogout = () => {
+        firebaseAuth.signOut().then(function () {
+            alert('Logout successful');
+        }).catch(function (error) {
+            alert('OOps something went wrong check your console');
+            console.log(err);
+        });
+    }
     render() {
 
         return (
             <div className="container-admin">
+                <button onClick={this.handleLogout}>Sair</button>
                 <CardInicial />
                 <CardSobre />
                 <CardEdital />
@@ -435,10 +537,10 @@ class Admin extends React.Component {
                 <div className="container-card-admin">
                     <div className="titulo-admin">Edital</div>
                 </div>
-                
+
             </div>
         );
     }
 }
 
-export default Admin;
+export default WithAuth(Admin);

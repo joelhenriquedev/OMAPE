@@ -1,58 +1,75 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 
 import './estilo.css'
 
-function Header(props) {
+class Header extends React.Component {
 
-  const [ isMenuEnable, setMenuEnable ] = useState('hidden');
+  constructor(props) {
+    super(props)
+  this.state = {
+      menuEnable: 'hidden'
+    }
 
-  const handleMenu = () => {
-    if(isMenuEnable === 'hidden') {
-      setMenuEnable('show')
+    this.handleMenu =  this.handleMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+
+  }
+
+  handleMenu = () => {
+    if(this.state.menuEnable === 'hidden') {
+      this.setState({
+        menuEnable: 'show'
+      })
     } else {
-      setMenuEnable('hidden')
+      this.setState({
+        menuEnable: 'hidden'
+      })
     }
   }
 
-  const closeMenu = () => {
-    setMenuEnable('hidden')
+  closeMenu = () => {
+    this.setState({
+      menuEnable: 'hidden'
+    })
   }
 
-  return (
-    <React.Fragment>
-      <div className="header">
-        <div className="logo-header">
-          OMAPE
-            </div>
-        <div onClick={handleMenu} className="menu-header-hamburger">
-          <FontAwesomeIcon icon={faBars} />
+  render() {
+    return (
+      <React.Fragment>
+        <div className="header">
+          <div className="logo-header">
+            OMAPE
+              </div>
+          <div onClick={this.handleMenu} className="menu-header-hamburger">
+            <FontAwesomeIcon icon={faBars} />
+          </div>
+          <div className="menu-header">
+            <ul>
+              <li><a href="#inicio">Inicio</a></li>
+              <li><a href="#sobre">Sobre</a></li>
+              <li><a href="#equipe">Equipe</a></li>
+              <li><a href="#contato">Contato</a></li>
+              <li><a href="#inicio">Cartaz</a></li>
+              <li><Link href="/login"><a>Efetuar login</a></Link></li>
+            </ul>
+          </div>
         </div>
-        <div className="menu-header">
+        <div className={"menu-hamburger " + this.state.menuEnable}>
           <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#equipe">Equipe</a></li>
-            <li><a href="#contato">Contato</a></li>
-            <li><a href="#inicio">Cartaz</a></li>
-            <li><Link href="/admin"><a>Efetuar login</a></Link></li>
+            <li onClick={this.closeMenu}><a href="#inicio">Inicio</a></li>
+            <li onClick={this.closeMenu}><a href="#sobre">Sobre</a></li>
+            <li onClick={this.closeMenu}><a href="#equipe">Equipe</a></li>
+            <li onClick={this.closeMenu}><a href="#contato">Contato</a></li>
+            <li onClick={this.closeMenu}><a href="#inicio">Cartaz</a></li>
+            <Link href="/login"><li onClick={this.closeMenu}><a>Efetuar login</a></li></Link>
           </ul>
         </div>
-      </div>
-      <div className={"menu-hamburger " + isMenuEnable}>
-        <ul>
-          <li onClick={closeMenu}><a href="#inicio">Inicio</a></li>
-          <li onClick={closeMenu}><a href="#sobre">Sobre</a></li>
-          <li onClick={closeMenu}><a href="#equipe">Equipe</a></li>
-          <li onClick={closeMenu}><a href="#contato">Contato</a></li>
-          <li onClick={closeMenu}><a href="#inicio">Cartaz</a></li>
-          <li onClick={closeMenu}><Link href="/admin"><a>Efetuar login</a></Link></li>
-        </ul>
-      </div>
-    </React.Fragment>
-  )
+      </React.Fragment>
+    )
+  }
 }
 
 export default Header;
